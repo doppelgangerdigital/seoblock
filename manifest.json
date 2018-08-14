@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "SeoBlock",
   "version": "1.0.0",
-  "description": "Hide websites you don't like to see",
+  "description": "Hide search results you don't like",
   "permissions": ["storage"],
   "minimum_chrome_version": "68",
   "content_scripts": [{
