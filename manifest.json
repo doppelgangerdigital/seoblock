@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "SeoBlock",
+  "version": "0.0.1",
+  "description": "Hide websites you don't like to see",
+  "permissions": ["storage"],
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["src/app.js"]
+  }]
+}

@@ -1,0 +1,8 @@
+{
+  "google": ".g",
+  "duckduckgo": ".result",
+  "yandex": ".serp-item",
+  "bing": ".b_algo",
+  "rambler": ".b-serp-item",
+  "mail": ".result__li"
+}
