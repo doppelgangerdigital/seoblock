@@ -7,5 +7,6 @@
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
     "js": ["src/app.js"]
-  }]
+  }],
+  "options_page": "src/options.html"
 }

@@ -1,0 +1,57 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+body > * {
+  width: 100%;
+}
+
+main {
+  flex-grow: 2;
+}
+
+footer > * {
+  text-align: left;
+}
+
+.words {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 32px;
+}
+
+.words:empty::after {
+  display: block;
+  content: 'You haven\'t banned any words yet.';
+  color: grey;
+  font-size: 12px;
+  text-align: center;
+  margin: 128px 0;
+}
+
+.words button {
+  vertical-align: middle;
+}
+
+.word {
+  font-style: italic;
+}
+
+.word::before {
+  display: inline;
+  content: open-quote;
+}
+
+.word::after {
+  display: inline;
+  content: close-quote;
+}

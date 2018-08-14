@@ -1,3 +1,5 @@
+const placeholder = 'This result was hidden due to your SeoBlock preferences.'
+
 if (document.readyState === 'interactive') {
   start()
 } else {
@@ -13,7 +15,7 @@ function start () {
 }
 
 function inspectElement (element) {
-  element.setAttribute('hidden', '')
+  element.innerHTML = placeholder
 }
 
 function toArray(DOMList) {
