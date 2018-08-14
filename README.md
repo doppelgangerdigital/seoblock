@@ -8,5 +8,5 @@ Secure yourself from toxic and unwanted information with SeoBlock.
 
 ## Mentions
 
-[Maxim Kulikov](https://thenounproject.com/maxim221/) — logo
+[Maxim Kulikov](https://thenounproject.com/maxim221/) — logo  
 [Serge Soloview](https://www.facebook.com/serge.soloview) — idea
