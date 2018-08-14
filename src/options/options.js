@@ -12,9 +12,9 @@ newWordForm.addEventListener('submit', e => {
 render()
 
 function render () {
-  console.log('Fire!')
-  chrome.storage.sync.get(null, items => {
-    console.log(items)
+  chrome.storage.sync.get({
+    bannedWords: []
+  }, items => {
     bannedWordsContainer.innerHTML = items.bannedWords.map((word, index) => `
       <li>
         <button type="button" id="delete-${index}">Delete</button>
@@ -32,7 +32,9 @@ function render () {
 }
 
 function addWord(word, cb) {
-  chrome.storage.sync.get(null, items => {
+  chrome.storage.sync.get({
+    bannedWords: []
+  }, items => {
     chrome.storage.sync.set({
       bannedWords: items.bannedWords.concat([word])
     }, cb)
@@ -40,7 +42,9 @@ function addWord(word, cb) {
 }
 
 function deleteWord (index, cb) {
-  chrome.storage.sync.get(null, items => {
+  chrome.storage.sync.get({
+    bannedWords: []
+  }, items => {
     chrome.storage.sync.set({
       bannedWords: items.bannedWords.slice(0, index).concat(items.bannedWords.slice(index + 1))
     }, cb)
