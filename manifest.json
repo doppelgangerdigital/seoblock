@@ -1,12 +1,19 @@
 {
   "manifest_version": 2,
   "name": "SeoBlock",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Hide websites you don't like to see",
   "permissions": ["storage"],
+  "minimum_chrome_version": "68",
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
     "js": ["src/app.js"]
   }],
-  "options_page": "src/options.html"
+  "options_page": "src/options/options.html",
+  "icons": {
+    "16": "src/assets/16.png",
+    "48": "src/assets/48.png",
+    "128": "src/assets/128.png"
+
+  }
 }
