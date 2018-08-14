@@ -9,13 +9,28 @@ if (document.readyState === 'interactive') {
 function start () {
   getFilters(filters => {
     loadCurrentDomainFilters(filters, currentDomainFilters => {
-      toArray(document.querySelectorAll(currentDomainFilters)).forEach(inspectElement)
+      chrome.storage.sync.get(null, items => {
+        toArray(document.querySelectorAll(currentDomainFilters)).forEach(element => {
+          inspectElement(element, items.bannedWords)
+        })
+      })
     })
   })
 }
 
-function inspectElement (element) {
-  element.innerHTML = placeholder
+function inspectElement (element, bannedWords) {
+  const content = extractContent(element).toLowerCase()
+
+  bannedWords.forEach(word => {
+    if (content.indexOf(word.toLowerCase()) !== -1) {
+      element.innerHTML = placeholder
+    }
+  })
+}
+
+function extractContent (element) {
+  return element.textContent +
+    element.getAttribute('href') || ''
 }
 
 function toArray(DOMList) {
