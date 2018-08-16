@@ -3,12 +3,27 @@
   "name": "SeoBlock",
   "version": "1.0.0",
   "description": "Hide search results you don't like",
-  "permissions": ["storage"],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs"
+  ],
   "minimum_chrome_version": "68",
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
-    "js": ["src/app.js"]
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "js": [
+      "src/app.js"
+    ]
   }],
+  "background": {
+    "scripts": [
+      "src/contextMenu.js"
+    ],
+    "persistent": false
+  },
   "options_page": "src/options/options.html",
   "icons": {
     "16": "src/assets/16.png",
