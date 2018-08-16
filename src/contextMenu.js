@@ -20,6 +20,8 @@ chrome.tabs.onActivated.addListener(updateCurrentDomainStatus)
 chrome.storage.onChanged.addListener(updateCurrentDomainStatus)
 
 
+
+
 function updateCurrentDomainStatus () {
   chrome.tabs.query({
     active: true

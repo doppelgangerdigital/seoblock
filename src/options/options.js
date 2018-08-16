@@ -4,12 +4,16 @@ const newWordForm = document.getElementById('new-word-form')
 
 newWordForm.addEventListener('submit', e => {
   e.preventDefault();
-  addWord(newWordInput.value, render)
+  addWord(newWordInput.value)
   newWordInput.value = null
   return false;
 })
 
+chrome.storage.onChanged.addListener(render)
 render()
+
+
+
 
 function render () {
   chrome.storage.sync.get({
