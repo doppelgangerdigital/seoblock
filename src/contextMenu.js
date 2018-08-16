@@ -64,6 +64,4 @@ function getDomainByUrl (url) {
     .slice(1).join('')
     .split('/')
     .slice(0, 1).join('')
-    .split('.')
-    .slice(-2).join('.')
 }
