@@ -1,4 +1,4 @@
-# SeoBlock ☂️
+# ☂️ SeoBlock [![Become a patron](https://miloslav.website/patreon.svg)](https://www.patreon.com/uyouthe)
 SeoBlock allows you to hide search results you don't like.
 
 ## How does it work?
