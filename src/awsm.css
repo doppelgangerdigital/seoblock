@@ -323,11 +323,14 @@ summary{
   font-weight:700;
   border-bottom:1px dashed;
   cursor:pointer; }
-  summary::marker{
+  summary::-webkit-details-marker{
     display:none; }
 
 noscript{
   color:#d00000; }
+
+::-moz-selection{
+  background:rgba(0, 100, 193, 0.15); }
 
 ::selection{
   background:rgba(0, 100, 193, 0.15); }
