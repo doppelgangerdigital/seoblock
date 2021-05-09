@@ -1,54 +1,76 @@
-const placeholder = 'This result was hidden due to your SeoBlock preferences.'
+const wrapperSelector = `.ListingLayout-outerContainer > *:nth-child(2) > *:nth-child(3) > *:first-child`
+const parentSelector = `.Post`
+const tagSelector = `[data-click-id="subreddit"]`
 
-if (document.readyState === 'interactive') {
-  start()
-} else {
-  document.addEventListener('DOMContentLoaded', start)
+const debounce = (fn, wait = 100) => {
+    // this is double debounce
+    // it fires like this
+    // calls:          1111111111111111
+    // actually fired: 1000000000000001
+
+    // so only first and last call
+
+    let shouldCallMore
+    let timer
+    let maxWaitTimer
+    let isWaiting
+    let fnArgs = []
+
+    const stopWaiting = () => {
+        if (shouldCallMore) fn(...fnArgs)
+        isWaiting = shouldCallMore = false
+    }
+
+    const call = () => {
+        shouldCallMore = false
+        fn(...fnArgs)
+    }
+
+    return (...args) => {
+        fnArgs = args
+
+        shouldCallMore = true
+
+        clearTimeout(timer)
+        timer = setTimeout(stopWaiting, wait)
+
+        if (isWaiting) return
+        isWaiting = true
+
+        clearTimeout(maxWaitTimer)
+        maxWaitTimer = setTimeout(call, 20)
+    }
 }
 
-function start () {
-  getFilters(filters => {
-    loadCurrentDomainFilters(filters, currentDomainFilters => {
-      chrome.storage.sync.get(null, items => {
-        toArray(document.querySelectorAll(currentDomainFilters)).forEach(element => {
-          inspectElement(element, items.bannedWords)
+let observer
+
+const start = () => {
+    if (observer) return
+
+    const handleChanges = () => debounce(chrome.storage.sync.get(null, store => {
+        const bannedTags = store.bannedWords || []
+        if (bannedTags.length === 0) return
+        console.log(bannedTags)
+        document.querySelectorAll(parentSelector).forEach(parent => {
+            const tag = parent.querySelector(tagSelector)?.getAttribute('href')
+                .replace('r/', '')
+                .replaceAll('/', '')
+
+            console.log(parent, parent.querySelector(tagSelector), tag)
+            if (!bannedTags.includes(tag) && !bannedTags.includes('r/' + tag)) return
+            parent.remove()
         })
-      })
+    }))
+
+    handleChanges()
+    observer = new MutationObserver(handleChanges)
+    observer.observe(document.querySelector(wrapperSelector), {
+        childList: true,
     })
-  })
 }
 
-function inspectElement (element, bannedWords) {
-  const content = extractContent(element).toLowerCase()
-
-  bannedWords.forEach(word => {
-    if (content.indexOf(word.toLowerCase()) !== -1) {
-      element.innerHTML = placeholder
-    }
-  })
-}
-
-function extractContent (element) {
-  return element.textContent +
-    element.getAttribute('href') || ''
-}
-
-function toArray(DOMList) {
-  return Array.prototype.slice.call(DOMList)
-}
-
-function loadCurrentDomainFilters (filters, cb) {
-  const domains = Object.keys(filters)
-  domains.forEach(domain => {
-    if (window.location.hostname.indexOf(domain) !== -1) {
-      cb(filters[domain])
-      return
-    }
-  })
-}
-
-function getFilters (cb) {
-  fetch("https://cdn.rawgit.com/uyouthe/seoblock/master/src/filters.json")
-    .then(response => response.json())
-    .then(cb)
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    start()
+} else {
+    document.addEventListener('DOMContentLoaded', start)
 }
