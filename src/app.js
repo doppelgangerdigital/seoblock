@@ -1,6 +1,6 @@
 const placeholder = 'This result was hidden due to your SeoBlock preferences.'
 
-if (document.readyState === 'interactive') {
+if (document.readyState === 'interactive' || document.readyState === 'ready') {
   start()
 } else {
   document.addEventListener('DOMContentLoaded', start)
