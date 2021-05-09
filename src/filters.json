@@ -4,5 +4,6 @@
   "yandex": ".serp-item",
   "bing": ".b_algo",
   "rambler": ".b-serp-item",
-  "mail": ".result__li"
+  "mail": ".result__li",
+  "reddit": ".ListingLayout-backgroundContainer ~ * > *:nth-child(3) > *:first-child > *[class]:nth-child(5) > *"
 }
